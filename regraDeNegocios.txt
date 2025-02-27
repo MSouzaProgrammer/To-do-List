@@ -1,0 +1,18 @@
+User -> To do List* -> duties*
+
+Duties:
+duties -> String
+status -> num
+progression status -> num
+date to perform -> Date
+
+ToDoList:
+duties -> List<duties>
+listSectot -> enum
+surname -> String
+
+User:
+id -> null
+name -> String
+email -> String
+password -> String
