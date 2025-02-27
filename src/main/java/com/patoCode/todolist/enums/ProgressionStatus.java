@@ -1,5 +1,5 @@
 package com.patoCode.todolist.enums;
 
 public enum ProgressionStatus {
-    NOT_STARTED, IN_PROGRESS, DONE
+    WAITING, FINISHED, POSTPONED, EXPIRED, IN_PROGRESS
 }
