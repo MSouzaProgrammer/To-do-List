@@ -1,5 +1,5 @@
 package com.patoCode.todolist.enums;
 
-public enum DutieSector {
+public enum TodoListSector {
     WORK, SCHOOL, HOME
 }

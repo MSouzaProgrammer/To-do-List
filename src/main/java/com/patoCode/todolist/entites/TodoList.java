@@ -1,8 +1,7 @@
 package com.patoCode.todolist.entites;
 
 import java.util.List;
-
-import com.patoCode.todolist.enums.DutieSector;
+import com.patoCode.todolist.enums.TodoListSector;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -27,17 +26,19 @@ public class TodoList {
     private List<Duties> lDuties;
 
     @Enumerated(EnumType.STRING)
-    private DutieSector dutieSector;
+    private TodoListSector todoListSector;
     private String surname;
 
     @ManyToOne
     private User user;
 
+    public Object getlDuties;
+
     public TodoList(){}
-    public TodoList(Long id, List<Duties> lDuties, DutieSector dutieSector, String surname, User user) {
+    public TodoList(Long id, List<Duties> lDuties, TodoListSector todoListSector, String surname, User user) {
         this.id = id;
         this.lDuties = lDuties;
-        this.dutieSector = dutieSector;
+        this.todoListSector = todoListSector;
         this.surname = surname;
         this.user = user;
     }
@@ -47,11 +48,11 @@ public class TodoList {
     public void setId(Long id) {
         this.id = id;
     }
-    public DutieSector getDutieSector() {
-        return dutieSector;
+    public TodoListSector getDutieSector() {
+        return todoListSector;
     }
-    public void setDutieSector(DutieSector dutieSector) {
-        this.dutieSector = dutieSector;
+    public void setTodoListSector(TodoListSector todoListSector) {
+        this.todoListSector = todoListSector;
     }
     public String getSurname() {
         return surname;
@@ -64,5 +65,12 @@ public class TodoList {
     }
     public void setUser(User user) {
         this.user = user;
+    }
+    public List<Duties> getlDuties() {
+        return lDuties;
+    }
+
+    public void insertDuties(Duties duties){
+        lDuties.add(duties);
     }
 }
