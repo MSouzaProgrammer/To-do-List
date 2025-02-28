@@ -30,12 +30,16 @@ public class TodoList {
     private DutieSector dutieSector;
     private String surname;
 
+    @ManyToOne
+    private User user;
+
     public TodoList(){}
-    public TodoList(Long id, List<Duties> lDuties, DutieSector dutieSector, String surname) {
+    public TodoList(Long id, List<Duties> lDuties, DutieSector dutieSector, String surname, User user) {
         this.id = id;
         this.lDuties = lDuties;
         this.dutieSector = dutieSector;
         this.surname = surname;
+        this.user = user;
     }
     public Long getId() {
         return id;
@@ -54,5 +58,11 @@ public class TodoList {
     }
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
     }
 }

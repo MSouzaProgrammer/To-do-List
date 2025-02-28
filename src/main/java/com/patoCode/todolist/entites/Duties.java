@@ -35,14 +35,13 @@ public class Duties {
 
     public Duties(){}
 
-    public Duties(Long id, String duties, Status status, ProgressionStatus progressionStatus, LocalDate dueDate,
-            TodoList toDoList) {
+    public Duties(Long id, String duties, Status status, ProgressionStatus progressionStatus, TodoList toDoList, LocalDate dueDate) {
         this.id = id;
         this.duties = duties;
         this.status = status;
         this.progressionStatus = progressionStatus;
         this.dueDate = dueDate;
-        this.todoList = todoList;
+        this.toDoList = toDoList;
     }
 
     public Long getId() {
@@ -86,11 +85,11 @@ public class Duties {
     }
 
     public TodoList getTodoList() {
-        return todoList;
+        return toDoList;
     }
 
     public void setTodoList(TodoList todoList) {
-        this.todoList = todoList;
+        this.toDoList = todoList;
     }
     
     
