@@ -1,13 +1,12 @@
 package com.patoCode.todolist.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.patoCode.todolist.entites.Duties;
 import com.patoCode.todolist.entites.TodoList;
-import com.patoCode.todolist.enums.Status;
 import com.patoCode.todolist.enums.TodoListSector;
 import com.patoCode.todolist.repository.TodoListRepository;
 
@@ -40,10 +39,7 @@ public class TodoListServices {
 
     public TodoList findById(Long id) {
         TodoList todoList = todoListFindById(id);
-        if (todoList != null) {
-            return todoList;
-        }
-        return null;
+        return todoList;
     }
 
     public List<TodoList> findAll() {
@@ -112,6 +108,4 @@ public class TodoListServices {
         List<Duties> duties = todoList.getlDuties();
         return dutie = duties.stream().filter(d -> d.getId().equals(idDuties)).findFirst().orElse(null);
     }
-
-
 }

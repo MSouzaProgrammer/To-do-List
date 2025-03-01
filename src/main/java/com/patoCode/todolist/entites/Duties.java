@@ -3,7 +3,6 @@ package com.patoCode.todolist.entites;
 import java.time.LocalDate;
 import com.patoCode.todolist.enums.ProgressionStatus;
 import com.patoCode.todolist.enums.Status;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
