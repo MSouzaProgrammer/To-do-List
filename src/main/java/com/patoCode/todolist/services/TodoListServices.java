@@ -1,10 +1,13 @@
 package com.patoCode.todolist.services;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.patoCode.todolist.entites.Duties;
 import com.patoCode.todolist.entites.TodoList;
+import com.patoCode.todolist.enums.Status;
 import com.patoCode.todolist.enums.TodoListSector;
 import com.patoCode.todolist.repository.TodoListRepository;
 
@@ -85,7 +88,30 @@ public class TodoListServices {
         return false;
     }
 
-    public void updateSector(TodoListSector todoListSector, Long idTodoList){
-
+    public Boolean updateSector(TodoListSector todoListSector, Long idTodoList){
+        TodoList todoList = todoListFindById(idTodoList);
+        if(todoList != null){
+            todoList.setTodoListSector(todoListSector);
+            return true;
+        }
+        return false;
     }
+
+    public List<Duties> getlAllDuties(Long idList){
+        TodoList todoList = todoListFindById(idList);
+        return todoList.getlDuties();
+    }
+
+    public Duties getDuties(Long idList, Long idDuties){
+        Duties dutie;
+
+        TodoList todoList = todoListFindById(idList);
+        if (todoList == null) {
+            return null;
+        }
+        List<Duties> duties = todoList.getlDuties();
+        return dutie = duties.stream().filter(d -> d.getId().equals(idDuties)).findFirst().orElse(null);
+    }
+
+
 }

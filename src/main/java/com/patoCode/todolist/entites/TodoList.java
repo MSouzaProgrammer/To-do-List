@@ -32,8 +32,6 @@ public class TodoList {
     @ManyToOne
     private User user;
 
-    public Object getlDuties;
-
     public TodoList(){}
     public TodoList(Long id, List<Duties> lDuties, TodoListSector todoListSector, String surname, User user) {
         this.id = id;
