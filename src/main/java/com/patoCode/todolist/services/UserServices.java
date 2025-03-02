@@ -1,8 +1,11 @@
 package com.patoCode.todolist.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.patoCode.todolist.entites.TodoList;
 import com.patoCode.todolist.entites.User;
 import com.patoCode.todolist.repository.UserRepository;
 
@@ -14,6 +17,7 @@ public class UserServices {
         return userRepository.findById(id).orElse(null);
     }
 
+    //#region CRUD FINALIZED
     public Boolean save(User user){
         if(user != null){
             userRepository.save(user);
@@ -31,7 +35,16 @@ public class UserServices {
     }
 
     public User findById(Long id){
+        return findByUser(id);
+    }
+
+    public List<User> findAll(){
+        return userRepository.findAll();
+    }
+    //#endregion
+
+    public List<TodoList> getTodoList(Long id){
         User user = findByUser(id);
-        return user;
+        return user.getTodoList();
     }
 }
