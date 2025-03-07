@@ -1,7 +1,10 @@
 package com.patoCode.todolist.entites;
 
 import java.util.List;
+import java.util.Optional;
+
 import com.patoCode.todolist.enums.TodoListSector;
+import com.patoCode.todolist.repository.UserRepository;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -46,7 +49,13 @@ public class TodoList {
     public void setId(Long id) {
         this.id = id;
     }
-    public TodoListSector getDutieSector() {
+    public List<Duties> getlDuties() {
+        return lDuties;
+    }
+    public void setlDuties(List<Duties> lDuties) {
+        this.lDuties = lDuties;
+    }
+    public TodoListSector getTodoListSector() {
         return todoListSector;
     }
     public void setTodoListSector(TodoListSector todoListSector) {
@@ -63,9 +72,6 @@ public class TodoList {
     }
     public void setUser(User user) {
         this.user = user;
-    }
-    public List<Duties> getlDuties() {
-        return lDuties;
     }
 
     public void insertDuties(Duties duties){

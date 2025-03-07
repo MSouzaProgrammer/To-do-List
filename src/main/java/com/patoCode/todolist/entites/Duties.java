@@ -28,7 +28,7 @@ public class Duties {
     private ProgressionStatus progressionStatus;
     private LocalDate dueDate;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "todo_list_id")
     private TodoList toDoList;
 
@@ -90,6 +90,4 @@ public class Duties {
     public void setTodoList(TodoList todoList) {
         this.toDoList = todoList;
     }
-    
-    
 }

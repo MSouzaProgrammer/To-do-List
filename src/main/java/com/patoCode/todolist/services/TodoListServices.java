@@ -7,22 +7,31 @@ import org.springframework.stereotype.Service;
 
 import com.patoCode.todolist.entites.Duties;
 import com.patoCode.todolist.entites.TodoList;
+import com.patoCode.todolist.entites.User;
 import com.patoCode.todolist.enums.TodoListSector;
 import com.patoCode.todolist.repository.TodoListRepository;
+import com.patoCode.todolist.repository.UserRepository;
 
 @Service
 public class TodoListServices {
     @Autowired
     private TodoListRepository todoListRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     private TodoList todoListFindById(Long id) {
         return todoListRepository.findById(id).orElse(null);
     }
 
-
     // #region save, delete[All], finbyId[All]
     public Boolean save(TodoList todoList) {
+        User user = userRepository.findById(todoList.getUser().getId()).orElseThrow(() -> new RuntimeException("User not found!"));
         if (todoList != null) {
+            TodoList todoListDTO = new TodoList();   
+            todoList.setSurname(todoListDTO.getSurname());
+            todoList.setTodoListSector(todoListDTO.getTodoListSector());
+            todoList.setUser(user);
             todoListRepository.save(todoList);
             return true;
         }
@@ -100,7 +109,6 @@ public class TodoListServices {
 
     public Duties getDuties(Long idList, Long idDuties){
         Duties dutie;
-
         TodoList todoList = todoListFindById(idList);
         if (todoList == null) {
             return null;

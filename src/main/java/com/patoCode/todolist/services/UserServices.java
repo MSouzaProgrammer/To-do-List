@@ -11,8 +11,12 @@ import com.patoCode.todolist.repository.UserRepository;
 
 @Service
 public class UserServices {
+
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private TodoListServices todoListServices;
     private User findByUser(Long id){
         return userRepository.findById(id).orElse(null);
     }
@@ -43,8 +47,26 @@ public class UserServices {
     }
     //#endregion
 
-    public List<TodoList> getTodoList(Long id){
+    public List<TodoList> getList(Long id){
         User user = findByUser(id);
         return user.getTodoList();
+    }
+
+    public Boolean addTodoList(TodoList todoList, Long id){
+        User user = findByUser(id);
+        user.addList(todoList);
+        return true;
+    }
+
+    public Boolean SaveTodoList(TodoList todoList, Long idUser){
+        User user =  findByUser(idUser);
+        if(user != null){
+            todoList.setUser(user); 
+            todoListServices.save(todoList);
+            user.getTodoList().add(todoList);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
 }

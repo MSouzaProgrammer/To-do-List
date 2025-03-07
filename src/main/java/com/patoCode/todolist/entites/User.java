@@ -1,5 +1,6 @@
 package com.patoCode.todolist.entites;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -21,15 +22,15 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TodoList> todoList;
+    private List<TodoList> list;
 
     public User(){}
-    public User(Long id, String name, String email, String password, List<TodoList> todoList) {
+    public User(Long id, String name, String email, String password, List<TodoList> list) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.todoList = todoList;
+        this.list = list;
     }
 
     public Long getId() {
@@ -57,7 +58,10 @@ public class User {
         this.password = password;
     }
     public List<TodoList> getTodoList() {
-        return todoList;
+        return list;
     }
     
+    public void addList(TodoList todoList){
+        list.add(todoList);
+    }
 }
