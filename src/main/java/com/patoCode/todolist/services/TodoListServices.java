@@ -19,20 +19,22 @@ public class TodoListServices {
 
     @Autowired
     private UserRepository userRepository;
+    private User findByUser(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
 
     private TodoList todoListFindById(Long id) {
         return todoListRepository.findById(id).orElse(null);
     }
 
     // #region save, delete[All], finbyId[All]
-    public Boolean save(TodoList todoList) {
-        User user = userRepository.findById(todoList.getUser().getId()).orElseThrow(() -> new RuntimeException("User not found!"));
-        if (todoList != null) {
-            TodoList todoListDTO = new TodoList();   
-            todoList.setSurname(todoListDTO.getSurname());
-            todoList.setTodoListSector(todoListDTO.getTodoListSector());
+    public Boolean save(TodoList todoList, Long id) {
+        User user = findByUser(id);
+        if(user!=null){
+            TodoList newTodoList = todoList;
             todoList.setUser(user);
-            todoListRepository.save(todoList);
+            user.addList(newTodoList);
+            userRepository.save(user);
             return true;
         }
         return false;

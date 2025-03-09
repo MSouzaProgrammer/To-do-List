@@ -3,6 +3,8 @@ package com.patoCode.todolist.entites;
 import java.util.List;
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.patoCode.todolist.enums.TodoListSector;
 import com.patoCode.todolist.repository.UserRepository;
 
@@ -33,6 +35,7 @@ public class TodoList {
     private String surname;
 
     @ManyToOne
+    @JsonBackReference
     private User user;
 
     public TodoList(){}
@@ -73,7 +76,6 @@ public class TodoList {
     public void setUser(User user) {
         this.user = user;
     }
-
     public void insertDuties(Duties duties){
         lDuties.add(duties);
     }

@@ -17,56 +17,45 @@ public class UserServices {
 
     @Autowired
     private TodoListServices todoListServices;
-    private User findByUser(Long id){
+
+    private User findByUser(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 
-    //#region CRUD FINALIZED
-    public Boolean save(User user){
-        if(user != null){
+    // #region CRUD FINALIZED
+    public Boolean save(User user) {
+        if (user != null) {
             userRepository.save(user);
             return true;
         }
         return false;
     }
 
-    public Boolean delete(Long id){
-        if(userRepository.existsById(id)){
+    public Boolean delete(Long id) {
+        if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
             return true;
         }
         return false;
     }
 
-    public User findById(Long id){
+    public User findById(Long id) {
         return findByUser(id);
     }
 
-    public List<User> findAll(){
+    public List<User> findAll() {
         return userRepository.findAll();
     }
-    //#endregion
+    // #endregion
 
-    public List<TodoList> getList(Long id){
+    public List<TodoList> getList(Long id) {
         User user = findByUser(id);
         return user.getTodoList();
     }
 
-    public Boolean addTodoList(TodoList todoList, Long id){
+    public Boolean addTodoList(TodoList todoList, Long id) {
         User user = findByUser(id);
         user.addList(todoList);
         return true;
-    }
-
-    public Boolean SaveTodoList(TodoList todoList, Long idUser){
-        User user =  findByUser(idUser);
-        if(user != null){
-            todoList.setUser(user); 
-            todoListServices.save(todoList);
-            user.getTodoList().add(todoList);
-            userRepository.save(user);
-            return true;
-        }
-        return false;
     }
 }

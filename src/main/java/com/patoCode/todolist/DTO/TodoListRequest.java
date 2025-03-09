@@ -1,17 +1,12 @@
 package com.patoCode.todolist.DTO;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.patoCode.todolist.enums.TodoListSector;
 import com.patoCode.todolist.entites.Duties;
 import java.util.List;
 
-public class TodoListDTO {
+public class TodoListRequest {
     private List<Duties> duties;
-
-    @JsonProperty("todoListSector")  // Força o Jackson a reconhecer
     private TodoListSector todoListSector;
-
-    @JsonProperty("surname")  // Força o Jackson a reconhecer
     private String surname;
 
     public List<Duties> getDuties() {
