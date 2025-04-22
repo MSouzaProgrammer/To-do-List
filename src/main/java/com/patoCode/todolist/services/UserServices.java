@@ -8,19 +8,18 @@ import org.springframework.stereotype.Service;
 import com.patoCode.todolist.entites.TodoList;
 import com.patoCode.todolist.entites.User;
 import com.patoCode.todolist.repository.UserRepository;
-
+import com.patoCode.todolist.repository.TodoListRepository;
 @Service
 public class UserServices {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private TodoListServices todoListServices;
-
     private User findByUser(Long id) {
         return userRepository.findById(id).orElse(null);
     }
+
+    @Autowired
+    private TodoListRepository todoListRepository;
 
     // #region CRUD FINALIZED
     public Boolean save(User user) {
@@ -48,7 +47,7 @@ public class UserServices {
     }
     // #endregion
 
-    public List<TodoList> getList(Long id) {
+    public List<TodoList> getAllList(Long id) {
         User user = findByUser(id);
         return user.getTodoList();
     }
@@ -57,5 +56,14 @@ public class UserServices {
         User user = findByUser(id);
         user.addList(todoList);
         return true;
+    }
+
+    public TodoList getList(Long idUser, Long idList){
+        TodoList todoList = todoListRepository.findById(idList).orElse(null);
+
+        if(todoList != null && todoList.getUser().getId() == idUser){
+            return todoList;
+        }
+        return null;
     }
 }

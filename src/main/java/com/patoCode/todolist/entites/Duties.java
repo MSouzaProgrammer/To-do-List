@@ -3,6 +3,7 @@ package com.patoCode.todolist.entites;
 import java.time.LocalDate;
 import com.patoCode.todolist.enums.ProgressionStatus;
 import com.patoCode.todolist.enums.Status;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -14,18 +15,24 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_Duties")
+@Table(name = "tb_duties")
 public class Duties {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String duties;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Status status;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private ProgressionStatus progressionStatus;
+
+    @Column(nullable = false)
     private LocalDate dueDate;
 
     @ManyToOne(optional = false)

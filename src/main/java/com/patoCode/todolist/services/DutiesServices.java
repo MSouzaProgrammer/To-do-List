@@ -7,25 +7,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.patoCode.todolist.entites.Duties;
+import com.patoCode.todolist.entites.TodoList;
+import com.patoCode.todolist.entites.User;
 import com.patoCode.todolist.enums.ProgressionStatus;
 import com.patoCode.todolist.enums.Status;
 import com.patoCode.todolist.repository.DutiesRepository;
+import com.patoCode.todolist.repository.TodoListRepository;
+import com.patoCode.todolist.repository.UserRepository;
 
 @Service
 public class DutiesServices {
     @Autowired
     private DutiesRepository dutiesRepository;
-
     private Duties findDutiesById(Long id){
         return dutiesRepository.findById(id).orElse(null);
     }
+    
+    @Autowired
+    private TodoListRepository todoListRepository;
+    public TodoList findByListId(Long id){
+        return todoListRepository.findById(id).orElse(null);
+    }
+
+    @Autowired
+    private UserRepository userRepository;
+    private User findByUser(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
 
     //#region save, delete[All], finbyId[All]
-
-    public Boolean save(Duties duties){
-        if(duties == null){ return false; }
-        dutiesRepository.save(duties);
-        return true;
+    public Boolean save(Long idUser, Long idList,Duties duties){
+        if(findByListId(idList).getUser().getId() == idUser){
+            if(duties != null){
+                findByListId(idList).insertDuties(duties);
+                dutiesRepository.save(duties);
+                return true;
+            }
+        }
+        return false;
     }
 
     public Boolean deleteById(Long id){
@@ -37,8 +56,11 @@ public class DutiesServices {
     }
 
     public Boolean deleteAll() {
-        dutiesRepository.deleteAll();
-        return true;
+        if(dutiesRepository.findAll() != null){
+            dutiesRepository.deleteAll();
+            return true;
+        }
+        return false;
     }
 
     public Duties findById(Long id){

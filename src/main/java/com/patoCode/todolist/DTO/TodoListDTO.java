@@ -1,40 +1,54 @@
 package com.patoCode.todolist.DTO;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.patoCode.todolist.enums.TodoListSector;
-import com.patoCode.todolist.entites.Duties;
 import java.util.List;
 
+import com.patoCode.todolist.entites.Duties;
+import com.patoCode.todolist.entites.TodoList;
+import com.patoCode.todolist.entites.User;
+import com.patoCode.todolist.enums.TodoListSector;
+
 public class TodoListDTO {
-    private List<Duties> duties;
 
-    @JsonProperty("todoListSector")  // Força o Jackson a reconhecer
+    private Long id;
+    private List<Duties> lDuties;
     private TodoListSector todoListSector;
-
-    @JsonProperty("surname")  // Força o Jackson a reconhecer
     private String surname;
-
-    public List<Duties> getDuties() {
-        return duties;
+    private User user;
+    public TodoListDTO(TodoList todoList) {
+        this.id = todoList.getId();
+        this.lDuties = todoList.getlDuties();
+        this.todoListSector = todoList.getTodoListSector();
+        this.surname = todoList.getSurname();
+        this.user = todoList.getUser();
     }
-
-    public void setDuties(List<Duties> duties) {
-        this.duties = duties;
+    public Long getId() {
+        return id;
     }
-
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public List<Duties> getlDuties() {
+        return lDuties;
+    }
+    public void setlDuties(List<Duties> lDuties) {
+        this.lDuties = lDuties;
+    }
     public TodoListSector getTodoListSector() {
         return todoListSector;
     }
-
     public void setTodoListSector(TodoListSector todoListSector) {
         this.todoListSector = todoListSector;
     }
-
     public String getSurname() {
         return surname;
     }
-
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
     }
 }
