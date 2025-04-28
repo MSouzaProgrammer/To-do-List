@@ -40,6 +40,7 @@ public class DutiesServices {
         if(findByListId(idList).getUser().getId() == idUser){
             if(duties != null){
                 findByListId(idList).insertDuties(duties);
+                duties.setIdUser(idUser);
                 dutiesRepository.save(duties);
                 return true;
             }

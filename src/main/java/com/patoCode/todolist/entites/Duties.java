@@ -22,6 +22,9 @@ public class Duties {
     private Long id;
 
     @Column(nullable = false)
+    private Long idUser;
+
+    @Column(nullable = false)
     private String duties;
 
     @Enumerated(EnumType.STRING)
@@ -41,7 +44,7 @@ public class Duties {
 
     public Duties(){}
 
-    public Duties(Long id, String duties, Status status, ProgressionStatus progressionStatus, TodoList toDoList, LocalDate dueDate) {
+    public Duties(Long id,String duties, Status status, ProgressionStatus progressionStatus, TodoList toDoList, LocalDate dueDate) {
         this.id = id;
         this.duties = duties;
         this.status = status;
@@ -52,6 +55,14 @@ public class Duties {
 
     public Long getId() {
         return id;
+    }
+
+    public Long getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 
     public void setId(Long id) {
